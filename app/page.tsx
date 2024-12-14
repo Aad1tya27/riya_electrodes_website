@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import BrandLogos from './components/BrandLogos'
+// import BrandLogos from '../components/BrandLogos'
+import BrandLogos from '@/components/BrandLogos'
 
 export default function Home() {
   return (

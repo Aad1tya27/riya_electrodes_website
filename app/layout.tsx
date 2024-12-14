@@ -2,9 +2,9 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
-import MobileMenuToggle from './components/MobileMenuToggle'
-import BrandsDropdown from './components/BrandsDropdown'
-import MobileBrandsSubmenu from './components/MobileBrandsSubmenu'
+import MobileMenuToggle from '@/components/MobileMenuToggle'
+import BrandsDropdown from '@/components/BrandsDropdown'
+import MobileBrandsSubmenu from '@/components/MobileBrandsSubmenu'
 
 const inter = Inter({ subsets: ['latin'] })
 
