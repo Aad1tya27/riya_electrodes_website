@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Image from 'next/image'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -48,51 +48,53 @@ export default function Products() {
 
 
   return (
-    <div className="flex flex-col md:flex-row">
-      <div className="w-full md:w-1/4 p-4">
-        <h2 className="text-xl font-semibold mb-4">Filters</h2>
-        <div className="mb-4">
-          <h3 className="font-medium mb-2">Brand</h3>
-          <select
-            className="w-full p-2 border rounded"
-            value={selectedBrand}
-            onChange={(e) => setSelectedBrand(e.target.value)}
-          >
-            {brands.map(brand => (
-              <option key={brand} value={brand}>{brand}</option>
-            ))}
-          </select>
+    <Suspense fallback={<p>Loading...</p>}>
+      <div className="flex flex-col md:flex-row">
+        <div className="w-full md:w-1/4 p-4">
+          <h2 className="text-xl font-semibold mb-4">Filters</h2>
+          <div className="mb-4">
+            <h3 className="font-medium mb-2">Brand</h3>
+            <select
+              className="w-full p-2 border rounded"
+              value={selectedBrand}
+              onChange={(e) => setSelectedBrand(e.target.value)}
+            >
+              {brands.map(brand => (
+                <option key={brand} value={brand}>{brand}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <h3 className="font-medium mb-2">Category</h3>
+            <select
+              className="w-full p-2 border rounded"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              {categories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
+          </div>
         </div>
-        <div>
-          <h3 className="font-medium mb-2">Category</h3>
-          <select
-            className="w-full p-2 border rounded"
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            {categories.map(category => (
-              <option key={category} value={category}>{category}</option>
+        <div className="w-full md:w-3/4">
+          <h1 className="text-3xl font-bold mb-6">Our Products</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProducts.map((product) => (
+              <Link href={`/products/${product.id}`} key={product.id} className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                <Image src={product.image} alt={product.name} width={300} height={200} className="w-full h-48 object-cover" />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+                  <p className="text-gray-600 mb-2">${product.price.toFixed(2)}</p>
+                  <p className="text-sm text-gray-500">Brand: {product.brand}</p>
+                  <p className="text-sm text-gray-500">Category: {product.category}</p>
+                </div>
+              </Link>
             ))}
-          </select>
+          </div>
         </div>
       </div>
-      <div className="w-full md:w-3/4">
-        <h1 className="text-3xl font-bold mb-6">Our Products</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
-            <Link href={`/products/${product.id}`} key={product.id} className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
-              <Image src={product.image} alt={product.name} width={300} height={200} className="w-full h-48 object-cover" />
-              <div className="p-4">
-                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                <p className="text-gray-600 mb-2">${product.price.toFixed(2)}</p>
-                <p className="text-sm text-gray-500">Brand: {product.brand}</p>
-                <p className="text-sm text-gray-500">Category: {product.category}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </div>
+    </Suspense>
   )
 }
 
