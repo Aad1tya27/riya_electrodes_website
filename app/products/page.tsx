@@ -17,7 +17,15 @@ const products = [
 const brands = ['All', 'A', 'B', 'C']
 const categories = ['All', 'Category 1', 'Category 2', 'Category 3']
 
-export default function Products() {
+export default function Page(){
+  return(
+    <Suspense fallback={<p>Loading...</p>}>
+      <Products/>
+    </Suspense>
+  )
+}
+
+function Products() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -48,7 +56,6 @@ export default function Products() {
 
 
   return (
-    <Suspense fallback={<p>Loading...</p>}>
       <div className="flex flex-col md:flex-row">
         <div className="w-full md:w-1/4 p-4">
           <h2 className="text-xl font-semibold mb-4">Filters</h2>
@@ -94,7 +101,6 @@ export default function Products() {
           </div>
         </div>
       </div>
-    </Suspense>
   )
 }
 
