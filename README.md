@@ -1,2 +1,2 @@
-# riya_electrodes_website
+# Riya Electrodes
 Riya Electrodes Official Website
