@@ -35,7 +35,7 @@ export default function Products() {
     nextSearchParams.delete('brand')
 
     router.replace(`${pathname}?${nextSearchParams}`)
-  }, [searchParams])
+  }, [searchParams, pathname, router])
 
   useEffect(() => {
 

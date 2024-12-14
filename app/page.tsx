@@ -90,7 +90,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-xl font-semibold mb-4 text-gray-700">Get in Touch</h3>
-              <p className="mb-4 text-gray-600">We'd love to hear from you. Please fill out the form below or reach out to us using the contact information provided.</p>
+              <p className="mb-4 text-gray-600">We&#39;d love to hear from you. Please fill out the form below or reach out to us using the contact information provided.</p>
               <div className="space-y-2 text-gray-600">
                 <p><strong>Email:</strong> riyaelectrodes.ceo@gmail.com</p>
                 <p><strong>Phone:</strong> +91 9717012810</p>
