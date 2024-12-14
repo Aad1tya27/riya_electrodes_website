@@ -29,7 +29,7 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold mb-8 text-center text-gray-800">Featured Categories</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {['Electronics', 'Fashion', 'Home & Garden'].map((category, index) => (
+          {['Electronics', 'Fashion', 'Home & Garden'].map((category) => (
             <div key={category} className="relative h-64 rounded-lg overflow-hidden group shadow-lg transform transition duration-300 hover:scale-105">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 opacity-75"></div>
               <Image
