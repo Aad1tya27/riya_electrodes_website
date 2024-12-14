@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 // This would typically come from an API or database
 const product = {
@@ -20,12 +20,11 @@ const product = {
   ]
 }
 
-export default function ProductPage({ params }: { params: { id: string } }) {
+export default function ProductPage() {
   const [selectedImage, setSelectedImage] = useState(0)
   const router = useRouter()
-  useEffect(()=>{
-    console.log(params)
-  },[params])
+  const url = usePathname()
+  console.log(url)
   const addToCart = () => {
     // In a real application, this would add the product to a cart state or API
     // For now, we'll just navigate to the cart page
