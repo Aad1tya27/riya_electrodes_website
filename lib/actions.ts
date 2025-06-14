@@ -1,29 +1,23 @@
 'use server'
-import { promises as fs } from "fs"
-import path from "path"
+// import { promises as fs } from "fs"
+// import path from "path"
 import nodemailer from "nodemailer"
 import { Product } from "@/types/product"
+import { readDatabase } from "./db"
+// import { DatabaseData } from "@/types/database"
 
-export interface DatabaseData {
-  categories: string[]
-  brands: string[]
-  products: Product[]
-}
-
-async function readDatabase(): Promise<DatabaseData> {
-  try {
-    const filePath = path.join(process.cwd(), "db.json")
-    const fileContents = await fs.readFile(filePath, "utf8")
-    return JSON.parse(fileContents)
-  } catch (error) {
-    console.error("Error reading database:", error)
-    return {
-      categories: [],
-      brands: [],
-      products: [],
-    }
-  }
-}
+// async function readDatabase(): Promise<DatabaseData> {
+//   try {
+//     return getData()
+//   } catch (error) {
+//     console.error("Error reading database:", error)
+//     return {
+//       categories: [],
+//       brands: [],
+//       products: [],
+//     }
+//   }
+// }
 
 export async function getProducts(brand?: string, category?: string): Promise<Product[]> {
   const data = await readDatabase()
