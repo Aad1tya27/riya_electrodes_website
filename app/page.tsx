@@ -138,7 +138,7 @@ export default function Home() {
             <div className="w-[90%] lg:w-1/2 flex justify-center items-center relative">
               {/* <div className="absolute left-[24px] md:left-[83px] lg:left-[60px] top-0 bottom-0 w-1 bg-dark-brown rounded-full z-0"></div> */}
 
-              <ol className="space-y-14 pl-12 h-[90%] flex flex-col justify-center border-l-2 border-dark-brown">
+              <ol className="space-y-14 pl-12 h-[65%] flex flex-col justify-center border-l-2 border-dark-brown">
                 {[
                   {
                     title: "2000 — Established Riya International HQ, Faridabad",
@@ -151,10 +151,10 @@ export default function Home() {
                     title: "Expanded Footprint",
                     desc: "Branches established in Chennai & Pune",
                   },
-                  {
-                    title: "2018 — Riya Industries Manufacturing Unit",
-                    desc: "Set up in Bhiwadi, Rajasthan for automotive injection moulding parts",
-                  },
+                  // {
+                  //   title: "2018 — Riya Industries Manufacturing Unit",
+                  //   desc: "Set up in Bhiwadi, Rajasthan for automotive injection moulding parts",
+                  // },
                 ].map((item, idx) => (
                   <li key={idx} className="relative group transition-transform duration-300 hover:-translate-y-1">
                     <div className="absolute w-4 h-4 bg-white border-4 border-dark-brown rounded-full -left-14  top-1 group-hover:shadow-lg group-hover:scale-110 transition-all duration-300 z-10"></div>
@@ -186,15 +186,15 @@ export default function Home() {
           <h2 className="text-4xl font-bold mb-12 text-center text-white">Trusted Brands</h2>
           <BrandLogos />
           <div className="text-center mt-12">
-            <p className="text-pale-blonde text-lg mb-6">
+            <p className="text-[#fcf7eb] text-lg mb-6">
               We partner with industry-leading manufacturers to bring you the finest materials
             </p>
-            <Link
+            {/* <Link
               href="/products"
               className="inline-block bg-white text-dark-brown px-8 py-3 rounded-full font-semibold hover:bg-pale-blonde transition-all duration-300 shadow-lg"
             >
               Shop by Brand
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>

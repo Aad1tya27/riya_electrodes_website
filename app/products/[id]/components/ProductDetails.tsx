@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { getProduct, type Product } from "@/lib/actions"
+import { Product } from "@/types/product"
 import { useCart } from "@/lib/cart-context"
 
 interface ProductDetailsProps {
@@ -22,8 +22,13 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
   useEffect(() => {
     const loadProduct = async () => {
       try {
-        const productData = await getProduct(productId)
-        setProduct(productData)
+        const res = await fetch(`/api/products/${productId}`)
+        if (res.ok) {
+          const data = await res.json()
+          setProduct(data)
+        } else {
+          console.error("Failed to fetch product")
+        }
       } catch (error) {
         console.error("Error loading product:", error)
       } finally {

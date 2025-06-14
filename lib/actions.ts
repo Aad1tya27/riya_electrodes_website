@@ -2,19 +2,7 @@
 import { promises as fs } from "fs"
 import path from "path"
 import nodemailer from "nodemailer"
-
-
-export interface Product {
-  id: number
-  name: string
-  category: string
-  brand: string
-  description: string
-  images: string[]
-  measurements: Array<{ [key: string]: string }>
-  advantages?: string[],
-  table?: { [key: string]: string }
-}
+import { Product } from "@/types/product"
 
 export interface DatabaseData {
   categories: string[]
@@ -29,10 +17,9 @@ async function readDatabase(): Promise<DatabaseData> {
     return JSON.parse(fileContents)
   } catch (error) {
     console.error("Error reading database:", error)
-    // Return default data if file doesn't exist
     return {
-      categories: ["Wires", "Filters", "Resins"],
-      brands: ["Nakanishi", "Hitachi", "Besdia", "Shofu", "Kuraray"],
+      categories: [],
+      brands: [],
       products: [],
     }
   }
@@ -126,7 +113,7 @@ ${name}
     })
 
     await transporter.sendMail({
-      from: process.env.FROM_EMAIL_ID,
+      from: `"Website Inquiry Form" <${process.env.FROM_EMAIL_ID}>`,
       to: process.env.TO_EMAIL_ID,
       subject: "Product Inquiry from Riya Electrodes Website",
       text: emailContent,

@@ -4,7 +4,8 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { getProducts, getCategories, getBrands, type Product } from "@/lib/actions"
+import { getCategories, getBrands } from "@/lib/actions"
+import { Product } from "@/types/product"
 
 export default function ProductsContent() {
   const searchParams = useSearchParams()
@@ -20,7 +21,11 @@ export default function ProductsContent() {
   useEffect(() => {
     const loadInitialData = async () => {
       try {
-        const [categoriesData, brandsData] = await Promise.all([getCategories(), getBrands()])
+        const res = await fetch("/api/brands");
+        const jsonObj = await res.json()
+        const brandsData = jsonObj.brands;
+        const res1 = await fetch("/api/categories");
+        const categoriesData = await res1.json()
         setCategories(["All", ...categoriesData])
         setBrands(["All", ...brandsData])
       } catch (error) {
@@ -46,10 +51,8 @@ export default function ProductsContent() {
     const loadProducts = async () => {
       setLoading(true)
       try {
-        const productsData = await getProducts(
-          selectedBrand === "All" ? undefined : selectedBrand,
-          selectedCategory === "All" ? undefined : selectedCategory,
-        )
+        const res = await fetch(`/api/products?brand=${selectedBrand}&category=${selectedCategory}`)
+        const productsData = await res.json()
         setProducts(productsData)
         setFilteredProducts(productsData)
       } catch (error) {

@@ -1,6 +1,5 @@
-// app/api/contact/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { sendMailAction } from '@/lib/actions' // adjust import path as needed
+import { sendMailAction } from '@/lib/actions' 
 
 export async function POST(req: NextRequest) {
   const body = await req.formData()

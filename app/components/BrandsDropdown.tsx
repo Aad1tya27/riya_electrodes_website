@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react"
 import Link from "next/link"
-import { getBrands } from "@/lib/actions"
 
 export default function BrandsDropdown() {
   const [isOpen, setIsOpen] = useState(false)
@@ -11,7 +10,9 @@ export default function BrandsDropdown() {
 
   useEffect(() => {
     const loadBrands = async () => {
-      const brandList = await getBrands()
+      const res = await fetch("/api/brands");
+      const jsonObj = await res.json()
+      const brandList = jsonObj.brands;
       setBrands(brandList)
     }
     loadBrands()

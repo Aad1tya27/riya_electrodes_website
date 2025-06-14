@@ -1,6 +1,5 @@
-// app/api/send-inquiry/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { sendInquiry } from '@/lib/actions' // adjust path if needed
+import { sendInquiry } from '@/lib/actions'
 
 export async function POST(req: NextRequest) {
   try {

@@ -2,14 +2,15 @@
 
 import { useEffect, useState } from "react"
 import Marquee from "react-fast-marquee"
-import { getBrands } from "@/lib/actions"
 
 export default function BrandLogos() {
   const [brands, setBrands] = useState<string[]>([])
 
   useEffect(() => {
     const loadBrands = async () => {
-      const brandList = await getBrands()
+      const res = await fetch("/api/brands");
+      const jsonObj = await res.json()
+      const brandList = jsonObj.brands;
       setBrands(brandList)
     }
     loadBrands()
