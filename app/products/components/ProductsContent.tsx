@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { getCategories, getBrands } from "@/lib/actions"
 import { Product } from "@/types/product"
 
 export default function ProductsContent() {

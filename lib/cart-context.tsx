@@ -2,8 +2,7 @@
 
 import type React from "react"
 import { createContext, useContext, useState, useEffect } from "react"
-import type { Product } from "./actions"
-
+import { Product } from "@/types/product"
 export interface CartItem {
   productId: number
   name: string
