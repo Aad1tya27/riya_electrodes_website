@@ -4,8 +4,6 @@ import { useState } from "react"
 import Image from "next/image"
 import { useCart } from "@/lib/cart-context"
 import { useRouter } from "next/navigation"
-import { sendInquiry } from "../actions/sendInquiry"
-
 
 type ToastType = 'success' | 'error'
 
@@ -27,71 +25,54 @@ export default function Cart() {
 
   const router = useRouter()
 
-  //   const generateEmailContent = () => {
-  //     const itemsList = items
-  //       .map(
-  //         (item) =>
-  //           `${item.name} (${item.brand}) - ${Object.entries(item.selectedMeasurement)
-  //             .map(([key, value]) => `${key}: ${value}`)
-  //             .join(", ")}`,
-  //       )
-  //       .join("\n")
+  const handleSendInquiry = async () => {
+    if (!customerName || !customerEmail) return
 
-  //     return `
-  // Dear Riya Electrodes Team,
+    setLoading(true);
+    const payload ={
+      name: customerName,
+      email: customerEmail,
+      company: customerCompany,
+      gst: customerGST,
+      message: customerMessage,
+      items: items,
+    }
+    const res = await fetch("/api/send-inquiry", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    })
+    const result = await res.json()
 
-  // I would like to request a quote for the following products:
+    if (result.success) {
+      setToast({ type: 'success', message: 'Message sent!' })
+      clearCart()
+    } else {
+      setToast({ type: 'error', message: 'Failed to send message.' })
+    }
+    setLoading(false)
+    setTimeout(() => setToast(null), 3000)
+  }
 
-  // ${itemsList}
-
-  // My details:
-  // Name: ${customerName}
-  // Company: ${customerCompany}
-  // GST No. : ${customerGST} 
-  // Email: ${customerEmail}
-
-  // Additional Message:
-  // ${customerMessage}
-
-  // Please provide pricing and availability information.
-
-  // Thank you,
-  // ${customerName}
-  //     `.trim()
-  //   }
-
-  // const handleInquiry = () => {
-  //   const subject = encodeURIComponent("Product Inquiry from Riya Electrodes Website")
-  //   const body = encodeURIComponent(generateEmailContent())
-  //   window.location.href = `mailto:aadityaus62@gmail.com?subject=${subject}&body=${body}`
-  // }
 
   return (<>
-    {/* {toast && (
-      <div className={`fixed top-4 right-4 z-50 px-6 py-3 rounded-lg shadow-lg text-white transition-all duration-500
-          ${toast.type === 'success' ? 'bg-green-600' : 'bg-red-600'}
-        `}>
-        {toast.message}
-      </div>
-    )} */}
-
     {toast && (
-        <div className={`fixed top-6 right-6 z-50 text-white px-6 py-4 rounded-lg shadow-lg w-[300px] ${toast.type === 'success' ? 'bg-green-700' : 'bg-red-700'} `}>
-          <div className="flex justify-between items-start">
-            <div className="font-semibold">{toast.message}</div>
-            <button
-              onClick={() => setToast(null)}
-              className="text-white text-xl leading-none hover:text-gray-300 ml-4"
-              aria-label="Close"
-            >
-              &times;
-            </button>
-          </div>
-          <div className="mt-2 h-1 bg-white/30 relative overflow-hidden rounded">
-            <div className="absolute top-0 left-0 h-full bg-white animate-slidebar"></div>
-          </div>
+      <div className={`fixed top-6 right-6 z-50 text-white px-6 py-4 rounded-lg shadow-lg w-[300px] ${toast.type === 'success' ? 'bg-green-700' : 'bg-red-700'} `}>
+        <div className="flex justify-between items-start">
+          <div className="font-semibold">{toast.message}</div>
+          <button
+            onClick={() => setToast(null)}
+            className="text-white text-xl leading-none hover:text-gray-300 ml-4"
+            aria-label="Close"
+          >
+            &times;
+          </button>
         </div>
-      )}
+        <div className="mt-2 h-1 bg-white/30 relative overflow-hidden rounded">
+          <div className="absolute top-0 left-0 h-full bg-white animate-slidebar"></div>
+        </div>
+      </div>
+    )}
     <div className="min-h-screen bg-gradient-to-b from-pale-blonde to-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-4xl font-bold text-dark-brown mb-8 text-center">Inquiry Cart</h1>
@@ -232,44 +213,7 @@ export default function Cart() {
             <div className="text-center">
 
               <button
-                onClick={async () => {
-                  if (!customerName || !customerEmail) return
-
-                  setLoading(true);
-                  const res = await sendInquiry({
-                    name: customerName,
-                    email: customerEmail,
-                    company: customerCompany,
-                    gst: customerGST,
-                    message: customerMessage,
-                    items: items,
-                  })
-
-
-                  if (res.success) {
-                    // alert("Inquiry sent successfully!")
-                    setToast({ type: 'success', message: 'Message sent!' })
-                    clearCart()
-                  } else {
-                    // alert("Failed to send inquiry. Please try again.")
-                    setToast({ type: 'error', message: 'Failed to send message.' })
-                  }
-                  setLoading(false)
-                  setTimeout(() => setToast(null), 3000)
-
-                  // const emailBody = generateEmailContent()
-                  // console.log("Generated Email Content:\n", emailBody)
-                  // const subject = encodeURIComponent("Product Inquiry from Riya Electrodes Website")
-                  // const body = encodeURIComponent(generateEmailContent())
-
-                  // window.location.href = `mailto:aadityaus62@gmail.com?subject=${subject}&body=${body}`
-
-                  // setTimeout(() => {
-                  //   if (confirm("Would you like to clear your inquiry cart?")) {
-                  //     clearCart()
-                  //   }
-                  // }, 1000)
-                }}
+                onClick={handleSendInquiry}
                 className={`inline-block btn-primary px-12 py-4 rounded-xl text-lg font-semibold shadow-lg ${!customerName || !customerEmail || loading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 disabled={!customerName || !customerEmail || loading}

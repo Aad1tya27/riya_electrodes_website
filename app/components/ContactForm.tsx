@@ -1,5 +1,4 @@
 'use client'
-import { sendMailAction } from "../actions/sendMail"
 import { useRef, useState } from "react"
 
 
@@ -22,7 +21,12 @@ export default function ContactForm() {
         setLoading(true)
         const formData = new FormData(e.currentTarget)
 
-        const result = await sendMailAction(formData)
+        const res = await fetch('/api/contact', {
+            method: 'POST',
+            body: formData,
+        })
+
+        const result = await res.json()
         if (result.success) {
             setToast({ type: 'success', message: 'Message sent!' })
             formRef.current?.reset()

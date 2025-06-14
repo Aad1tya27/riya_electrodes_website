@@ -1,7 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
 import BrandLogos from "./components/BrandLogos"
-import { sendMailAction } from './actions/sendMail'
 import ContactForm from "./components/ContactForm"
 
 
@@ -246,47 +245,7 @@ export default function Home() {
               </div>
 
             </div>
-            {/* <form action={sendMailAction} className="space-y-6 bg-white p-8 rounded-2xl shadow-xl">
-              <div>
-                <label htmlFor="name" className="block mb-2 text-medium-brown font-medium">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="w-full p-4 border border-tan-blonde rounded-lg focus:ring-2 focus:ring-medium-brown focus:border-transparent transition-all duration-300"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block mb-2 text-medium-brown font-medium">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="w-full p-4 border border-tan-blonde rounded-lg focus:ring-2 focus:ring-medium-brown focus:border-transparent transition-all duration-300"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block mb-2 text-medium-brown font-medium">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  className="w-full p-4 border border-tan-blonde rounded-lg focus:ring-2 focus:ring-medium-brown focus:border-transparent transition-all duration-300"
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" className="w-full btn-primary py-4 rounded-lg font-semibold text-lg shadow-lg">
-                Send Message
-              </button>
-            </form> */}
+            
             <ContactForm/>
           </div>
         </div>
