@@ -1,5 +1,4 @@
-// app/actions/sendInquiry.ts
-"use server"
+'use server'
 
 import nodemailer from "nodemailer"
 
