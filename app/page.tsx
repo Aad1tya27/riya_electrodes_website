@@ -180,7 +180,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Brand Logos Section */}
       <section id="brands" className="py-20 bg-gradient-to-r from-tan-blonde to-medium-brown">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold mb-12 text-center text-white">Trusted Brands</h2>
