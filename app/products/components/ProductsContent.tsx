@@ -95,7 +95,7 @@ export default function ProductsContent() {
     <div className="flex flex-col lg:flex-row gap-8">
       {/* Filters Sidebar */}
       <div className="w-full lg:w-1/4">
-        <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
+        <div className="bg-white  shadow-lg p-6 sticky top-8">
           <h2 className="text-2xl font-semibold mb-6 text-dark-brown">Filters</h2>
 
           {/* Search Bar */}
@@ -157,7 +157,7 @@ export default function ProductsContent() {
               <Link
                 href={`/products/${product.id}`}
                 key={product.id}
-                className="bg-white rounded-2xl overflow-hidden shadow-lg card-hover border border-pale-blonde"
+                className="bg-white overflow-hidden shadow-lg card-hover border border-pale-blonde"
               >
                 <div className="relative h-64 overflow-hidden">
                   <Image

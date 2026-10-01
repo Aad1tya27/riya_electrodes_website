@@ -12,10 +12,30 @@ import CartCounter from "./components/CartCounter"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Riya Electrodes - Industrial Wires, Filters & Resins",
+  metadataBase: new URL(
+    "https://riya-electodes.agarwal-aaditya2765.workers.dev"
+  ),
+
+  title: {
+    default: "Riya Electrodes - Industrial Wires, Filters & Resins",
+    template: "%s | Riya Electrodes",
+  },
+
   description:
-    "Premium industrial materials including precision wires, advanced filters, and quality resins from trusted brands.",
-    generator: 'v0.dev'
+    "Riya Electrodes supplies EDM wires, filters, resins and polishing materials from trusted brands for industrial applications.",
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  alternates: {
+    canonical: "/",
+  },
+
+  verification: {
+    google: "yhx9tFY4t0qEP-bH3IAlDTfN4gqKaPfjrqXd3XuNn3g",
+  },
 }
 
 export default function RootLayout({
@@ -98,7 +118,7 @@ export default function RootLayout({
                   <p className="text-sm text-gray-300 leading-relaxed">
                     RIYA Electrodes Pvt. Ltd., promoted by Riya International, has been a trusted name in EDM and Polishing solutions since 2001. Known for quality, integrity, and personal service, we offer a wide range of EDM supplies and polishing materials with fast shipping and reliable support.
                   </p>
-                  
+
                 </div>
                 <div className="md:ml-20">
                   <h3 className="text-xl font-semibold mb-4 text-pale-blonde">Quick Links</h3>

@@ -1,42 +1,42 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Product } from "@/types/product"
 import { useCart } from "@/lib/cart-context"
 
 interface ProductDetailsProps {
-  productId: number
+  product: Product
 }
 
-export default function ProductDetails({ productId }: ProductDetailsProps) {
-  const [product, setProduct] = useState<Product | null>(null)
+export default function ProductDetails({ product }: ProductDetailsProps) {
+  // const [product, setProduct] = useState<Product | null>(null)
   const [selectedImage, setSelectedImage] = useState(0)
   const [selectedMeasurement, setSelectedMeasurement] = useState<{ [key: string]: string } | null>(null)
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
   const router = useRouter()
   const [showAlert, setShowAlert] = useState(false)
   const { addToCart, items } = useCart()
 
-  useEffect(() => {
-    const loadProduct = async () => {
-      try {
-        const res = await fetch(`/api/products/${productId}`)
-        if (res.ok) {
-          const data = await res.json()
-          setProduct(data)
-        } else {
-          console.error("Failed to fetch product")
-        }
-      } catch (error) {
-        console.error("Error loading product:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    loadProduct()
-  }, [productId])
+  // useEffect(() => {
+  //   const loadProduct = async () => {
+  //     try {
+  //       const res = await fetch(`/api/products/${productId}`)
+  //       if (res.ok) {
+  //         const data = await res.json()
+  //         setProduct(data)
+  //       } else {
+  //         console.error("Failed to fetch product")
+  //       }
+  //     } catch (error) {
+  //       console.error("Error loading product:", error)
+  //     } finally {
+  //       setLoading(false)
+  //     }
+  //   }
+  //   loadProduct()
+  // }, [productId])
 
   const handleAddToInquiry = () => {
     if (product && selectedMeasurement) {
@@ -57,25 +57,25 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
     })
   }
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-medium-brown"></div>
-      </div>
-    )
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="flex justify-center items-center h-64">
+  //       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-medium-brown"></div>
+  //     </div>
+  //   )
+  // }
 
-  if (!product) {
-    return (
-      <div className="text-center py-12">
-        <h1 className="text-2xl font-bold text-dark-brown mb-4">Product Not Found</h1>
-        <p className="text-medium-brown mb-6">The product you're looking for doesn't exist.</p>
-        <button onClick={() => router.push("/products")} className="btn-primary px-6 py-3 rounded-lg font-semibold">
-          Back to Products
-        </button>
-      </div>
-    )
-  }
+  // if (!product) {
+  //   return (
+  //     <div className="text-center py-12">
+  //       <h1 className="text-2xl font-bold text-dark-brown mb-4">Product Not Found</h1>
+  //       <p className="text-medium-brown mb-6">The product you're looking for doesn't exist.</p>
+  //       <button onClick={() => router.push("/products")} className="btn-primary px-6 py-3 rounded-lg font-semibold">
+  //         Back to Products
+  //       </button>
+  //     </div>
+  //   )
+  // }
 
   return (
     <>
@@ -101,7 +101,7 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative">
         {/* Product Images */}
         <div className="space-y-4 lg:sticky top-6 self-start">
-          <div className="aspect-square bg-white rounded-2xl overflow-hidden shadow-lg">
+          <div className="aspect-square rounded-lg bg-white  overflow-hidden shadow-lg">
             <Image
               src={product.images[selectedImage] || "/placeholder.svg"}
               alt={product.name}
@@ -152,7 +152,7 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
             <h2 className="text-xl font-semibold text-dark-brown mb-3">Description</h2>
 
             {product.table && (
-              <div className="overflow-x-auto bg-pale-blonde  rounded-2xl p-6 shadow-md border border-tan-blonde mb-6">
+              <div className="overflow-x-auto bg-pale-blonde  p-6 shadow-md border border-tan-blonde mb-6">
                 <table className="w-full text-left text-dark-brown">
                   <tbody>
                     {Object.entries(product.table).map(([key, value]) => (

@@ -189,12 +189,6 @@ export default function Home() {
             <p className="text-[#fcf7eb] text-lg mb-6">
               We partner with industry-leading manufacturers to bring you the finest materials
             </p>
-            {/* <Link
-              href="/products"
-              className="inline-block bg-white text-dark-brown px-8 py-3 rounded-full font-semibold hover:bg-pale-blonde transition-all duration-300 shadow-lg"
-            >
-              Shop by Brand
-            </Link> */}
           </div>
         </div>
       </section>

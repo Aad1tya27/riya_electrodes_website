@@ -128,7 +128,9 @@ export async function sendMailAction(formData: FormData) {
   const message = formData.get('message')
 
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
       user: process.env.FROM_EMAIL_ID,
       pass: process.env.FROM_EMAIL_PASS,
